@@ -2,14 +2,20 @@ import React from "react";
 import "./styles.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import { useNavigate } from "react-router-dom";
+import { useBasketValue } from "../../store/BasketContext/BasketProvider";
 
 function Header() {
+  const navigate = useNavigate();
+  const [{ basket }] = useBasketValue();
+
   return (
     <div className="header">
       <img
         className="header__logo"
         src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
         alt="amazon logo"
+        onClick={() => navigate("/")}
       />
 
       <div className="header__search">
@@ -32,9 +38,14 @@ function Header() {
         </div>
       </div>
 
-      <div className="header__optionBasket">
+      <div
+        className="header__optionBasket"
+        onClick={() => navigate("/checkout")}
+      >
         <ShoppingBasketIcon />
-        <span className="header__optionLineTwo header__basketCount">0</span>
+        <span className="header__optionLineTwo header__basketCount">
+          {basket?.length}
+        </span>
       </div>
     </div>
   );
