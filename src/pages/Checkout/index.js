@@ -5,7 +5,7 @@ import { useBasketValue } from "../../store/BasketContext/BasketProvider";
 import CheckoutProduct from "../../components/CheckoutProduct";
 
 function Checkout() {
-  const [{ basket }, dispatch] = useBasketValue();
+  const [{ basket }] = useBasketValue();
 
   return (
     <div className="checkout">
@@ -28,9 +28,6 @@ function Checkout() {
               rating={item.rating}
             />
           ))}
-          {/* Checkout Product */}
-          {/* Checkout Product */}
-          {/* Checkout Product */}
         </div>
       </div>
 
