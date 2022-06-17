@@ -24,7 +24,7 @@ function Header() {
       </div>
 
       <div className="header__nav">
-        <div className="header__option">
+        <div className="header__option" onClick={() => navigate("/login")}>
           <span className="header__optionLineOne">Hello Guest</span>
           <span className="header__optionLineTwo">Sign In</span>
         </div>
