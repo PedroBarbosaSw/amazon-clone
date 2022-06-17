@@ -12,6 +12,7 @@
   width: 100px;
   object-fit: contain;
   margin: 0 20px;
+  cursor: pointer;
   margin-top: 18px;
 }
 
@@ -27,6 +28,10 @@
   padding: 10px;
   border: none;
   width: 100%;
+}
+
+.active {
+  cursor: pointer;
 }
 
 .header__searchIcon {
@@ -48,6 +53,7 @@
   display: flex;
   align-items: center;
   color: white;
+  cursor: pointer;
 }
 
 .header__basketCount {

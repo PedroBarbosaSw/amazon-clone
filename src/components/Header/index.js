@@ -37,7 +37,7 @@ function Header() {
       </div>
 
       <div className="header__nav">
-        <div className="header__option" onClick={handleAuthentication}>
+        <div className="header__option active" onClick={handleAuthentication}>
           <span className="header__optionLineOne">
             Hello {user ? user.email : " Guest"}
           </span>
