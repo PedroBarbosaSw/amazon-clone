@@ -4,10 +4,23 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { useNavigate } from "react-router-dom";
 import { useBasketValue } from "../../store/BasketContext/BasketProvider";
+import { useAuthValue } from "../../store/AuthContext/AuthProvider";
+import { auth } from "../../firebase";
 
 function Header() {
   const navigate = useNavigate();
   const [{ basket }] = useBasketValue();
+  const [{ user }] = useAuthValue();
+
+  const handleAuthentication = () => {
+    if (!user) {
+      navigate("/login");
+    }
+
+    if (user) {
+      auth.signOut();
+    }
+  };
 
   return (
     <div className="header">
@@ -24,14 +37,20 @@ function Header() {
       </div>
 
       <div className="header__nav">
-        <div className="header__option" onClick={() => navigate("/login")}>
-          <span className="header__optionLineOne">Hello Guest</span>
-          <span className="header__optionLineTwo">Sign In</span>
+        <div className="header__option" onClick={handleAuthentication}>
+          <span className="header__optionLineOne">
+            Hello {user ? user.email : " Guest"}
+          </span>
+          <span className="header__optionLineTwo">
+            {user ? "Sign Out" : "Sign In"}
+          </span>
         </div>
+
         <div className="header__option">
           <span className="header__optionLineOne">Returns</span>
           <span className="header__optionLineTwo">& Orders</span>
         </div>
+
         <div className="header__option">
           <span className="header__optionLineOne">Your</span>
           <span className="header__optionLineTwo">Prime</span>
