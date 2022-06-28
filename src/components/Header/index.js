@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useBasketValue } from "../../store/BasketContext/BasketProvider";
 import { useAuthValue } from "../../store/AuthContext/AuthProvider";
 import { auth } from "../../firebase";
@@ -46,10 +46,12 @@ function Header() {
           </span>
         </div>
 
-        <div className="header__option">
-          <span className="header__optionLineOne">Returns</span>
-          <span className="header__optionLineTwo">& Orders</span>
-        </div>
+        <Link to="/orders">
+          <div className="header__option">
+            <span className="header__optionLineOne">Returns</span>
+            <span className="header__optionLineTwo">& Orders</span>
+          </div>
+        </Link>
 
         <div className="header__option">
           <span className="header__optionLineOne">Your</span>
