@@ -14,10 +14,12 @@ import { getBasketTotal } from "../../store/BasketContext/BasketReducer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { db } from "../../firebase";
+
 export default function Payment() {
   const navigate = useNavigate();
   const [{ user }] = useAuthValue();
-  const [{ basket }] = useBasketValue();
+  const [{ basket }, dispatch] = useBasketValue();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -42,6 +44,8 @@ export default function Payment() {
     getClientSecret();
   }, [basket]);
 
+  console.log("the secret is", clientSecret);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -56,10 +60,25 @@ export default function Payment() {
       .then(({ paymentIntent }) => {
         // paymentIntent = payment confirmation
 
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+
         setSucceeded(true);
         setError(null);
         setProcessing(false);
 
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
+
+        // 7:21:10
         navigate("/orders", { replace: true });
       });
   };

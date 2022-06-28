@@ -16,6 +16,7 @@ function Home() {
         <div className="home__row">
           {twoProducts.map((item) => (
             <Product
+              key={item.id}
               id={item.id}
               title={item.title}
               price={item.price}
@@ -27,6 +28,7 @@ function Home() {
         <div className="home__row">
           {threeProducts.map((item) => (
             <Product
+              key={item.id}
               id={item.id}
               title={item.title}
               price={item.price}
@@ -38,6 +40,7 @@ function Home() {
         <div className="home__row">
           {oneProduct.map((item) => (
             <Product
+              key={item.id}
               id={item.id}
               title={item.title}
               price={item.price}
